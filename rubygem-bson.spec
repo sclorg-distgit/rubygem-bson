@@ -6,7 +6,7 @@
 
 Name: %{?scl_prefix}rubygem-%{gem_name}
 Version: 4.0.3
-Release: 1%{?dist}
+Release: 2%{?dist}
 Summary: Ruby Implementation of the BSON specification
 Group: Development/Languages
 License: ASL 2.0
@@ -54,6 +54,7 @@ rm -rf %{buildroot}%{gem_instdir}/ext/
 
 %check
 %{?scl:scl enable %{scl} - << \EOF}
+set -e
 pushd .%{gem_instdir}
 rspec -I$(dirs +1)%{gem_extdir_mri}:lib spec
 popd
@@ -77,6 +78,9 @@ popd
 %{gem_instdir}/spec
 
 %changelog
+* Wed Apr 06 2016 Pavel Valena <pvalena@redhat.com> - 4.0.3-2
+- Fix: build should fail on test failure
+
 * Mon Feb 29 2016 Pavel Valena <pvalena@redhat.com> - 4.0.3-1
 - Update to 4.0.3
 
